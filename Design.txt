@@ -1,1 +1,21 @@
 Leon Cadotte, 7Shifts exercise
+Generally we want to split up parsing string input and operating on this input, this will make the StringCalculator
+more modular and will allow additional methods like subtraction, multiplication, etc to be easily supported.
+So we want a separate method for converting input strings to integers, and another method for actually adding these integers.
+Methods:
+These methods could be static as the StringCalculator class has no data to store, however if we want to add support
+for running totals, or store values temporarily as a calculator might, we would require instance methods instead.
+So use instance methods generally. Using a class itself has advantages as we can later store mathematical constants like pi
+a calculator might make use of.
+
+inputToInt(String input):
+converts input to an array of integers. Should maintain the order of the numbers in the string.
+For example if "1,2,3" is input, we should return [1,2,3], this is useful for mathematical operations where the order
+of operands matters, like subtraction or division.
+This method will use a simple call to split(",") to separate the input string into an array of strings, these strings
+can then be converted to integers. Additionally we should make sure the string input isn't empty, and that each split
+string can be converted to an integer.
+
+Add(String numbers):
+Add will first check that 'numbers' isn't the empty string, if it is, return 0. Then we can use inputToInt to convert
+'numbers' to an array of integers, we can then easily add these numbers
