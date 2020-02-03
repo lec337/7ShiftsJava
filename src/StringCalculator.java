@@ -5,10 +5,24 @@ public class StringCalculator {
      * converts the input string numbers into an array of integers
      * @param input: String of the form "x,y,z..." where x,y,z are numbers, input cannot be the empty string
      * @return integer array containing the numbers from the input string
-     * @throws NumberFormatException if input is an empty string
+     * @throws NumberFormatException if input is an empty string, or a string number cannot be converted to an integer
      */
     public int[] inputToInt(String input) throws NumberFormatException{
-        return new int[] {0};
+        if(input.isEmpty()){
+            throw new NumberFormatException("inputToInt: cannot convert an empty string to integers");
+        }
+        // convert each number from 'input' to an integer
+        String[] stringNumbers = input.split(",");
+        int[] integerNumbers = new int[stringNumbers.length];
+        for(int i=0;i<stringNumbers.length;i++){
+            try {
+                integerNumbers[i] = Integer.parseInt(stringNumbers[i]);
+            }catch(NumberFormatException e){
+                throw new NumberFormatException("inputToInt: cannot convert string number: " + stringNumbers[i]
+                + " to an integer");
+            }
+        }
+        return integerNumbers;
     }
 
     /**
@@ -18,6 +32,7 @@ public class StringCalculator {
      */
     public int Add(String numbers){
         return 0;
+
     }
 
 
