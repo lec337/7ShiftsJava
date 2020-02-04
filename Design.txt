@@ -57,6 +57,9 @@ Add() is unchanged.
 Part 4:
 To support rejecting negative numbers, when we convert a string number to an integer, we can simply check if the resulting
 int is negative, if so throw an exception in inputToInt, here we only list the first negative number we come across, we
-don't list all potential negative numbers in the input. We can use a similar idea in Add() to ignore numbers larger than
+don't list all potential negative numbers in the input. The wording of the specification requires clarification here,
+an exception "Negatives not allowed", should be thrown, should this be a separate exception class, or should this be
+the message given to the exception we throw. I assumed the latter, and threw an IllegalArgumentException with this message
+ We can use a similar idea in Add() to ignore numbers larger than
 1000, if an int in the array input to Add() is greater than 1000, we can simply not add it into our running sum of all
 array numbers.
