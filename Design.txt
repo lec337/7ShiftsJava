@@ -47,4 +47,9 @@ and the last newline to end the delimiter, since the behavior in this case isn't
 be a delimiter. We run into a similar case with using numbers as a delimiter, for example:
 "//9\n,99999", is this "99999" supposed to evaluate to 9+9+9, or 999+9 or 99999, it is ambiguous, so we don't allow this
 case.
+Through testing additionally we find that characters with special meaning under regex "*", "+", "?" etc will be interpreted
+with their regex meaning when we try to use these characters to .split(), if these characters are involved in our delimiter.
+Since we want to split by these characters themselves, not by their special meaning, we want to escape each of these
+characters. To do so, we can simply replace every non-word character (digit, letter) with its escaped version, for example
+replace "+" with "\+" in our delimiter.
 Add() is unchanged.
