@@ -7,7 +7,7 @@ public class StringCalculator {
      * @return integer array containing the numbers from the input string
      * @throws NumberFormatException if input is an empty string, or a string number cannot be converted to an integer
      */
-    private int[] inputToInt(String input) throws NumberFormatException{
+    protected static int[] inputToInt(String input) throws NumberFormatException{
         if(input.isEmpty()){
             throw new NumberFormatException("Cannot convert an empty string to integers");
         }
@@ -30,7 +30,7 @@ public class StringCalculator {
      * @param numbers: String of the form "x,y,z..." where x,y,z are numbers, if the empty string is input, 0 is returned
      * @return integer, result of adding the integers in the string 'numbers', or 0 if numbers is the empty string
      */
-    public int Add(String numbers){
+    public static int Add(String numbers){
         if(numbers.isEmpty()){
             return 0;
         }
