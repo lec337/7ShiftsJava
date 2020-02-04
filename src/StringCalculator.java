@@ -32,6 +32,17 @@ public class StringCalculator {
         delimiter = delimiter.replaceAll("^//","");
         delimiter = delimiter.replaceAll("\n$","");
 
+        // determine if the delimiter contains any digits
+        m = Pattern.compile("([0-9]+)").matcher(delimiter);
+        if(m.find()){
+            // found digits in delimiter
+            throw new NumberFormatException("Delimiter: " + delimiter + " is invalid, contains digits");
+        }
+
+        // delimiter may contain several special characters like '*'. '?', etc, we need to escape these characters
+        // or else they will be improperly interpreted as regex patterns
+        delimiter = delimiter.replaceAll("\\W","\\\\$0");
+
         // convert each number from 'input' to an integer
         String[] stringNumbers = input.split(delimiter);
         System.out.println(Arrays.toString(stringNumbers));
