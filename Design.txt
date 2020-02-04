@@ -29,3 +29,15 @@ we see that the empty string cannot be converted to an int and throw an exceptio
 fair exception to throw as the user hasn't entered in any numbers and so we cannot convert their nothing into an integer.
 In the Add() method, if the user enters in a string containing only newlines, we don't return 0, and instead throw an
 exception, this is because the string the user entered wasn't empty, even though the newlines are ignored.
+
+
+Part 3:
+To account for this custom delimiter, in inputToInt(), before removing newlines, we need to extract the user's delimiter.
+This can be done via regular expression, using the pattern "^//.*\n", we ensure that we only get matches from the
+beginning of the string, we match "//" followed by any characters, ie the delimiter, then the newline, later we must remove
+the starting // and ending newline to get the raw delimiter, this can be done via replacing these with empty strings.
+we must be careful and replace the pattern "^//" and "\n$" to ensure that we don't remove part of the delimiter, if it
+contains "\n" or "//", these patterns will only match the // at the start of the string and \n at the end of the string.
+After splitting our input string by the delimiter, we can then remove newlines, we can only remove newlines here in case
+the user's delimiter contains newlines or is the newline itself.
+Add() is unchanged.
