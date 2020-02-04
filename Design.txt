@@ -53,3 +53,32 @@ Since we want to split by these characters themselves, not by their special mean
 characters. To do so, we can simply replace every non-word character (digit, letter) with its escaped version, for example
 replace "+" with "\+" in our delimiter.
 Add() is unchanged.
+
+Part 4:
+To support rejecting negative numbers, when we convert a string number to an integer, we can simply check if the resulting
+int is negative, if so throw an exception in inputToInt, here we only list the first negative number we come across, we
+don't list all potential negative numbers in the input. The wording of the specification requires clarification here,
+an exception "Negatives not allowed", should be thrown, should this be a separate exception class, or should this be
+the message given to the exception we throw. I assumed the latter, and threw an IllegalArgumentException with this message
+ We can use a similar idea in Add() to ignore numbers larger than
+1000, if an int in the array input to Add() is greater than 1000, we can simply not add it into our running sum of all
+array numbers.
+
+Here we run into a bit of difficulty if the user chooses to use "-" as a delimiter, we will then split the input string
+according to "-" which will remove any "-"'s from the input getting rid of negative numbers, again we could prevent
+"-" from being used as a delimiter.
+
+General efficiency considerations:
+Throughout the StringCalculator class, regular expressions and string operations involving regular expressions are used.
+Regression expressions are at best linear time and we do have some cases where we use regular expressions in a loop for example
+to remove newlines from a string argument before converting to an int.
+Generally however regular expressions are useful to use here due to their conciseness and simplicity. Instead of using
+regex, we could've iterated character by character through the input string to process the input and extract arguments.
+This may have been more efficient, as we could avoid several uses of regular expressions for example where we remove
+particular characters, by simply ignoring these characters as we iterate. This method of iteration however would have
+been quite bulky, and unreadable, especially considering that efficiency isn't that large a consideration given that the
+strings we get input won't typically be too long. For example, users likely don't often have to add up thousands of numbers,
+and if they do, they would likely use a more precise mathematical program.
+This program is also weak to integer overflow, if the user specifies values that add up to greater than Integer.MAX_VALUE
+we overflow and some sort of arithmetic exception is thrown. So if the user is going to be adding up large numbers, they
+should use some alternative mathematical library instead.
