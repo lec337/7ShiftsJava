@@ -27,3 +27,5 @@ We now have the potential error case where the user enters in an input containin
 we see that the empty string cannot be converted to an int and throw an exception, we give some message like:
 "Cannot convert string number:  to an integer", this is because the number in question is the empty string, this is a
 fair exception to throw as the user hasn't entered in any numbers and so we cannot convert their nothing into an integer.
+In the Add() method, if the user enters in a string containing only newlines, we don't return 0, and instead throw an
+exception, this is because the string the user entered wasn't empty, even though the newlines are ignored.
