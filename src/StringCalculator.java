@@ -45,7 +45,6 @@ public class StringCalculator {
 
         // convert each number from 'input' to an integer
         String[] stringNumbers = input.split(delimiter);
-        System.out.println(Arrays.toString(stringNumbers));
         int[] integerNumbers = new int[stringNumbers.length];
         for(int i=0;i<stringNumbers.length;i++){
             try {

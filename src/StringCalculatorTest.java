@@ -18,7 +18,7 @@ public class StringCalculatorTest {
 
         // test that exceptions are thrown in the case of bad input
         String[] exceptionInputs = {"//;\n","//,\n12ds,5,2","//,\n67,a21,89","\n","\n\n\n\n\n","//,\n\nd\n12","//,\n6\ng,\n4rt\n",
-            "//\n","//9\n89791","//j9l\n6j9l7j9l", "1,2,3"};
+            "//\n","//9\n89791","//j9l\n6j9l7j9l", "1,2,3","//,\n-8,5,2,6","//d\n5d-9dd-1"};
         boolean exceptionThrown = false;
         for(int i=0;i<exceptionInputs.length;i++){
             try{
@@ -39,9 +39,9 @@ public class StringCalculatorTest {
      */
     @Test
     public void AddTest(){
-        String[] testInputs = {"//,\n1,2,3","//+\n1+1","//b\n464b1b0","////\n1//1//1//1//1//1//1//1//1//1", "//?\n2?","",
-                    "//***^%\n1\n4***^%\n5***^%0","//ghy\n\n5\n\n\n8ghy\n5ghy3ghy1ghy1","//.*\n4\n.*5"};
-        int[] expectedReturn = {6,2,465,10,2,0,19,68,9};
+        String[] testInputs = {"//,\n1000,2,3","//+\n1+1","//b\n464b1b0b67676","////\n1//1//1//1//1//1//1//1//1//1//1001", "//?\n2?21232132?","",
+                    "//***^%\n1\n4***^%\n5***^%0","//ghy\n\n5\n\n\n8ghy\n5ghy3ghy1ghy1","//.*\n4\n.*5","//,\n-0,7,8"};
+        int[] expectedReturn = {1005,2,465,10,2,0,19,68,9,15};
         for(int i=0; i<testInputs.length; i++){
             assertEquals(expectedReturn[i],StringCalculator.Add(testInputs[i]));
         }
