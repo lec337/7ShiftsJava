@@ -5,8 +5,8 @@ So we want a separate method for converting input strings to integers, and anoth
 Methods:
 These methods could be static as the StringCalculator class has no data to store, however if we want to add support
 for running totals, or store values temporarily as a calculator might, we would require instance methods instead.
-So use instance methods generally. Using a class itself has advantages as we can later store mathematical constants like pi
-a calculator might make use of.
+For ease of testing, we use static methods, these could be changed rather easily to instance methods with slight modification
+to testing.
 
 inputToInt(String input):
 converts input to an array of integers. Should maintain the order of the numbers in the string.
