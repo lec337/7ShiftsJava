@@ -1,4 +1,5 @@
 Leon Cadotte, 7Shifts exercise
+Part 1:
 Generally we want to split up parsing string input and operating on this input, this will make the StringCalculator
 more modular and will allow additional methods like subtraction, multiplication, etc to be easily supported.
 So we want a separate method for converting input strings to integers, and another method for actually adding these integers.
@@ -19,3 +20,12 @@ string can be converted to an integer.
 Add(String numbers):
 Add will first check that 'numbers' isn't the empty string, if it is, return 0. Then we can use inputToInt to convert
 'numbers' to an array of integers, we can then easily add these numbers
+
+Part 2:
+Here we just have to ignore newlines in inputToInt(), we can do this by replacing all newlines with empty strings.
+We now have the potential error case where the user enters in an input containing all newlines, if this is the case,
+we see that the empty string cannot be converted to an int and throw an exception, we give some message like:
+"Cannot convert string number:  to an integer", this is because the number in question is the empty string, this is a
+fair exception to throw as the user hasn't entered in any numbers and so we cannot convert their nothing into an integer.
+In the Add() method, if the user enters in a string containing only newlines, we don't return 0, and instead throw an
+exception, this is because the string the user entered wasn't empty, even though the newlines are ignored.

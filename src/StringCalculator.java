@@ -3,7 +3,8 @@ public class StringCalculator {
 
     /**
      * converts the input string numbers into an array of integers
-     * @param input: String of the form "x,y,z..." where x,y,z are numbers, input cannot be the empty string
+     * @param input: String of the form "x,y,z..." where x,y,z are numbers, input cannot be the empty string, input can contain
+     *             newlines
      * @return integer array containing the numbers from the input string
      * @throws NumberFormatException if input is an empty string, or a string number cannot be converted to an integer
      */
@@ -11,6 +12,9 @@ public class StringCalculator {
         if(input.isEmpty()){
             throw new NumberFormatException("Cannot convert an empty string to integers");
         }
+        // remove newlines
+        input = input.replaceAll("\n","");
+
         // convert each number from 'input' to an integer
         String[] stringNumbers = input.split(",");
         int[] integerNumbers = new int[stringNumbers.length];
