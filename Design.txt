@@ -56,6 +56,7 @@ Add() is unchanged.
 
 Part 4:
 To support rejecting negative numbers, when we convert a string number to an integer, we can simply check if the resulting
-int is negative, if so throw an exception in inputToInt. We can use a similar idea in Add() to ignore numbers larger than
+int is negative, if so throw an exception in inputToInt, here we only list the first negative number we come across, we
+don't list all potential negative numbers in the input. We can use a similar idea in Add() to ignore numbers larger than
 1000, if an int in the array input to Add() is greater than 1000, we can simply not add it into our running sum of all
 array numbers.
