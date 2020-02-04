@@ -9,10 +9,10 @@ public class StringCalculator {
      * converts the input string numbers into an array of integers
      * @param input: String of the form "//<delimiter>\nx<delimiter>y<delimiter>z..." where x,y,z are numbers and <delimiter> is
      *             a custom, special sequence of characters used to separate numbers, input cannot be the empty string, input can contain
-     *             newlines, delimiter cannot be the newline or a number
+     *             newlines, delimiter cannot be the newline or a number, numbers cannot be negative
      * @return integer array containing the numbers from the input string
      * @throws NumberFormatException if input is an empty string, or a string number cannot be converted to an integer,
-     * @throws IllegalArgumentException if input isn't lead by valid delimiter
+     * @throws IllegalArgumentException if input isn't lead by valid delimiter or input contains negative numbers
      */
     protected static int[] inputToInt(String input) throws NumberFormatException, IllegalArgumentException{
         if(input.isEmpty()){
@@ -51,7 +51,12 @@ public class StringCalculator {
             try {
                 // remove newlines from individual strings if any exist
                 String currentStr = stringNumbers[i].replaceAll("\n","");
-                integerNumbers[i] = Integer.parseInt(currentStr);
+                int currentInt = Integer.parseInt(currentStr);
+                if(currentInt<0){
+                    // input number was negative
+                    throw new IllegalArgumentException("Number: " + Integer.toString(currentInt) + " is invalid, negatives not allowed");
+                }
+                integerNumbers[i] = currentInt;
             }catch(NumberFormatException e){
                 throw new NumberFormatException("Cannot convert string number: " + stringNumbers[i]
                 + " to an integer");
@@ -62,8 +67,13 @@ public class StringCalculator {
 
     /**
      * Adds up the numbers in the string 'numbers', returns the integer resulting
-     * @param numbers: String of the form "x,y,z..." where x,y,z are numbers, if the empty string is input, 0 is returned
+     * @param numbers: String of the form "//<delimiter>\nx<delimiter>y<delimiter>z..." where x,y,z are numbers and <delimiter> is
+     *          a custom, special sequence of characters used to separate numbers, input cannot be the empty string, input can contain
+     *          newlines, delimiter cannot be the newline or a number, numbers cannot be negative, any numbers greater
+     *          than 1000 are ignored.
      * @return integer, result of adding the integers in the string 'numbers', or 0 if numbers is the empty string
+     * @throws NumberFormatException if input is an empty string, or a string number cannot be converted to an integer,
+     * @throws IllegalArgumentException if input isn't lead by valid delimiter or input contains negative numbers
      */
     public static int Add(String numbers){
         if(numbers.isEmpty()){
@@ -73,6 +83,10 @@ public class StringCalculator {
         // add arguments
         int sum = 0;
         for(int arg : arguments){
+            if(arg>1000){
+                // ignore this argument > 1000
+                continue;
+            }
             sum += arg;
         }
         return sum;
