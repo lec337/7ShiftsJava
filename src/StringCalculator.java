@@ -7,9 +7,9 @@ public class StringCalculator {
      * @return integer array containing the numbers from the input string
      * @throws NumberFormatException if input is an empty string, or a string number cannot be converted to an integer
      */
-    public int[] inputToInt(String input) throws NumberFormatException{
+    private int[] inputToInt(String input) throws NumberFormatException{
         if(input.isEmpty()){
-            throw new NumberFormatException("inputToInt: cannot convert an empty string to integers");
+            throw new NumberFormatException("Cannot convert an empty string to integers");
         }
         // convert each number from 'input' to an integer
         String[] stringNumbers = input.split(",");
@@ -18,7 +18,7 @@ public class StringCalculator {
             try {
                 integerNumbers[i] = Integer.parseInt(stringNumbers[i]);
             }catch(NumberFormatException e){
-                throw new NumberFormatException("inputToInt: cannot convert string number: " + stringNumbers[i]
+                throw new NumberFormatException("Cannot convert string number: " + stringNumbers[i]
                 + " to an integer");
             }
         }
@@ -31,8 +31,16 @@ public class StringCalculator {
      * @return integer, result of adding the integers in the string 'numbers', or 0 if numbers is the empty string
      */
     public int Add(String numbers){
-        return 0;
-
+        if(numbers.isEmpty()){
+            return 0;
+        }
+        int[] arguments = inputToInt(numbers);
+        // add arguments
+        int sum = 0;
+        for(int arg : arguments){
+            sum += arg;
+        }
+        return sum;
     }
 
 
