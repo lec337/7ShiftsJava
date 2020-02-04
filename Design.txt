@@ -33,11 +33,18 @@ exception, this is because the string the user entered wasn't empty, even though
 
 Part 3:
 To account for this custom delimiter, in inputToInt(), before removing newlines, we need to extract the user's delimiter.
-This can be done via regular expression, using the pattern "^//.*\n", we ensure that we only get matches from the
+This can be done via regular expression, using the pattern "^//.+\n", we ensure that we only get matches from the
 beginning of the string, we match "//" followed by any characters, ie the delimiter, then the newline, later we must remove
 the starting // and ending newline to get the raw delimiter, this can be done via replacing these with empty strings.
 we must be careful and replace the pattern "^//" and "\n$" to ensure that we don't remove part of the delimiter, if it
 contains "\n" or "//", these patterns will only match the // at the start of the string and \n at the end of the string.
 After splitting our input string by the delimiter, we can then remove newlines, we can only remove newlines here in case
 the user's delimiter contains newlines or is the newline itself.
+We impose the restriction that a user's delimiter cannot be the newline, as there is no way to tell between a delimiter
+newline, newline after delimiter and other newlines that will be ignored, for example:
+"//\n\n\n\n" do we consider "\n" to be a delimiter and ignore the last two \n's, or do we consider 3 \n's to be a delimiter
+and the last newline to end the delimiter, since the behavior in this case isn't explicit, we don't allow the newline to
+be a delimiter. We run into a similar case with using numbers as a delimiter, for example:
+"//9\n,99999", is this "99999" supposed to evaluate to 9+9+9, or 999+9 or 99999, it is ambiguous, so we don't allow this
+case.
 Add() is unchanged.
